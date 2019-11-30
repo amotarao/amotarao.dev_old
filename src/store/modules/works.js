@@ -20,9 +20,9 @@ export const works = {
       const response = await fetch(url, {
         headers: { 'X-API-KEY': process.env.VUE_APP_CMS_X_API_KEY },
       });
-      console.log(response);
       const json = await response.json();
       const items = json.contents.map((item) => ({
+        id: item.id,
         title: item.title || null,
         thumbnail: item.thumbnail ? item.thumbnail.url : null,
         category: item.category ? item.category.name : null,

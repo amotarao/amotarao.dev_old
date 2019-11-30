@@ -1,11 +1,11 @@
 <template>
-  <a :data-align="align" class="work-card" href="">
+  <router-link :data-align="align" class="work-card" :to="`works/${id}`">
     <div class="image-wrap">
       <twitter-icon v-if="category === 'twitter'" class="icon" />
       <img v-else :src="thumbnail" :srcset="thumbnailSrcset" class="image" alt="" />
     </div>
     <p class="title">{{ title }}</p>
-  </a>
+  </router-link>
 </template>
 
 <script>
@@ -17,6 +17,10 @@ export default {
   },
   inheritAttrs: false,
   props: {
+    id: {
+      type: String,
+      required: true,
+    },
     title: {
       type: String,
       required: true,
