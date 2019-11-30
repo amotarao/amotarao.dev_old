@@ -1,12 +1,25 @@
 <template>
-  <div class="home"></div>
+  <div class="home">
+    <work-list />
+  </div>
 </template>
 
 <script>
-// @ is an alias to /src
-// import HelloWorld from '@/components/HelloWorld.vue';
+import WorkList from '../components/WorkList';
 
 export default {
-  name: 'home',
+  components: {
+    WorkList,
+  },
+  mounted() {
+    this.$store.dispatch('works/getItems');
+  },
 };
 </script>
+
+<style lang="scss" scoped>
+.home {
+  margin: 16px 0;
+  padding: 0 16px;
+}
+</style>
