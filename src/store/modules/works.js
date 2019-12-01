@@ -4,18 +4,29 @@ export const works = {
   namespaced: true,
   state: {
     items: [],
-    loading: true,
+    loaded: false,
+    getting: false,
   },
   mutations: {
     setItems(state, items) {
       state.items = items;
     },
-    finishLoading(state) {
-      state.loading = false;
+    startGet(state) {
+      state.getting = true;
+    },
+    finishGet(state) {
+      state.getting = false;
+    },
+    finishLoad(state) {
+      state.loaded = true;
     },
   },
   actions: {
-    async getItems({ commit }) {
+    async getItems({ state, commit }) {
+      if (state.getting) {
+        return;
+      }
+      commit('startGet');
       const url = `${process.env.VUE_APP_CMS_API_ENDPOINT}/works`;
       const response = await fetch(url, {
         headers: { 'X-API-KEY': process.env.VUE_APP_CMS_X_API_KEY },
@@ -28,7 +39,8 @@ export const works = {
         category: item.category ? item.category.name : null,
       }));
       commit('setItems', items);
-      commit('finishLoading');
+      commit('finishGet');
+      commit('finishLoad');
     },
   },
 };

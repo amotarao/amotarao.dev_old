@@ -1,5 +1,5 @@
 <template>
-  <div class="work" v-if="!loading">
+  <div class="work" v-if="loaded">
     <work-detail v-bind="item" />
   </div>
 </template>
@@ -12,8 +12,8 @@ export default {
     WorkDetail,
   },
   computed: {
-    loading() {
-      return this.$store.state.works.loading;
+    loaded() {
+      return this.$store.state.works.loaded;
     },
     item() {
       return this.$store.state.works.items.find((item) => item.id === this.$route.params.id);
