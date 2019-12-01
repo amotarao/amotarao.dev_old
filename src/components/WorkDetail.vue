@@ -1,9 +1,11 @@
 <template>
   <div class="work-detail">
-    <div class="image-wrap">
-      <twitter-icon v-if="category === 'twitter'" class="icon" />
-      <img v-else :src="thumbnail" :srcset="thumbnailSrcset" class="image" alt="" />
-      <h2>{{ title }}</h2>
+    <div class="cover">
+      <div class="image">
+        <twitter-icon v-if="category === 'twitter'" class="icon" />
+        <img v-else :src="thumbnail" :srcset="thumbnailSrcset" class="image" alt="" />
+      </div>
+      <h1 class="title">{{ title }}</h1>
     </div>
     <ul class="link-list">
       <li class="link-item">
@@ -73,7 +75,7 @@ export default {
   height: 100%;
   width: 100%;
 
-  .image-wrap {
+  .cover {
     height: 240px;
     position: sticky;
     top: -160px;
@@ -90,7 +92,7 @@ export default {
       z-index: 0;
     }
 
-    img {
+    .image {
       height: 100%;
       object-fit: cover;
       object-position: top center;
@@ -98,7 +100,7 @@ export default {
       width: 100%;
     }
 
-    h2 {
+    .title {
       background: rgba(#fff, 0.7);
       display: inline-block;
       font: 700 16px/24px 'Noto Sans';
